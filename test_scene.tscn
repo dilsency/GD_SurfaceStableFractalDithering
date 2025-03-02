@@ -1,0 +1,284 @@
+[gd_scene load_steps=23 format=3 uid="uid://jc48jcya6lh1"]
+
+[ext_resource type="Script" uid="uid://cg0rqfso5ek80" path="res://tools/generate_bayer_fractal_tool.gd" id="1_uhqqe"]
+[ext_resource type="Shader" uid="uid://c5ij4jklfnsop" path="res://shader/fractal_dither.gdshader" id="2_coq8p"]
+[ext_resource type="Texture2D" uid="uid://btrt3oajsvtxg" path="res://icon.svg" id="3_2nij2"]
+[ext_resource type="Texture2D" uid="uid://lritjvpcuq7t" path="res://profile_picture_transparent1024.png" id="3_8pr8v"]
+[ext_resource type="Texture2D" uid="uid://bxnmhvdurxwuq" path="res://dither_ramp_1739134782123.tres" id="3_coq8p"]
+[ext_resource type="ImageTexture3D" uid="uid://5hxibgc5aqa4" path="res://dither_3d_1739134782123.tres" id="4_2nij2"]
+[ext_resource type="Texture2D" uid="uid://7cg2schbj0bq" path="res://texture_07.png" id="7_8pr8v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_coq8p"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_2nij2"]
+sky_material = SubResource("ProceduralSkyMaterial_coq8p")
+
+[sub_resource type="Environment" id="Environment_7cbxl"]
+background_mode = 1
+background_color = Color(0.000165648, 0.0124783, 0.15805, 1)
+sky = SubResource("Sky_2nij2")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 4
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8pr8v"]
+render_priority = -1
+shader = ExtResource("2_coq8p")
+shader_parameter/albedo_tex = ExtResource("3_8pr8v")
+shader_parameter/dither_tex = ExtResource("4_2nij2")
+shader_parameter/dither_ramp_tex = ExtResource("3_coq8p")
+shader_parameter/dots_total = 64.0
+shader_parameter/dither_scale = 5.58
+shader_parameter/dot_size_variability = 0.345
+shader_parameter/dot_contrast = 1.0
+shader_parameter/dot_stretch_smoothness = 1.0
+shader_parameter/input_exposure = 1.0
+shader_parameter/input_offset = 0.0
+shader_parameter/use_radial_compensation = false
+shader_parameter/use_quantize_layers = false
+shader_parameter/use_inverse_dots = false
+shader_parameter/color_mode = 0
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/albedo_uv_offset = Vector2(0, 0)
+shader_parameter/albedo_uv_scale = Vector2(3.035, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6adnx"]
+material = SubResource("ShaderMaterial_8pr8v")
+subdivide_width = 4
+subdivide_height = 4
+subdivide_depth = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njel3"]
+render_priority = -1
+shader = ExtResource("2_coq8p")
+shader_parameter/albedo_tex = ExtResource("3_2nij2")
+shader_parameter/dither_tex = ExtResource("4_2nij2")
+shader_parameter/dither_ramp_tex = ExtResource("3_coq8p")
+shader_parameter/dots_total = 64.0
+shader_parameter/dither_scale = 5.49
+shader_parameter/dot_size_variability = 0.595
+shader_parameter/dot_contrast = 1.0
+shader_parameter/dot_stretch_smoothness = 1.0
+shader_parameter/input_exposure = 0.1
+shader_parameter/input_offset = 0.01
+shader_parameter/use_radial_compensation = false
+shader_parameter/use_quantize_layers = true
+shader_parameter/use_inverse_dots = false
+shader_parameter/color_mode = 1
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/albedo_uv_offset = Vector2(-0.13, -0.49)
+shader_parameter/albedo_uv_scale = Vector2(3.035, 2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_coq8p"]
+material = SubResource("ShaderMaterial_njel3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cbxl"]
+render_priority = -1
+shader = ExtResource("2_coq8p")
+shader_parameter/albedo_tex = ExtResource("7_8pr8v")
+shader_parameter/dither_tex = ExtResource("4_2nij2")
+shader_parameter/dither_ramp_tex = ExtResource("3_coq8p")
+shader_parameter/dots_total = 64.0
+shader_parameter/dither_scale = 6.43
+shader_parameter/dot_size_variability = 0.395
+shader_parameter/dot_contrast = 1.0
+shader_parameter/dot_stretch_smoothness = 1.0
+shader_parameter/input_exposure = 0.1
+shader_parameter/input_offset = 0.01
+shader_parameter/use_radial_compensation = false
+shader_parameter/use_quantize_layers = true
+shader_parameter/use_inverse_dots = false
+shader_parameter/color_mode = 1
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/albedo_uv_offset = Vector2(0, 0)
+shader_parameter/albedo_uv_scale = Vector2(15, 15)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8pr8v"]
+material = SubResource("ShaderMaterial_7cbxl")
+size = Vector2(25, 25)
+
+[sub_resource type="Shader" id="Shader_8pr8v"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.beta2's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_buypi"]
+render_priority = 0
+shader = SubResource("Shader_8pr8v")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_size = null
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pr8v"]
+material = SubResource("ShaderMaterial_buypi")
+
+[sub_resource type="Animation" id="Animation_rpuu0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vr1i5"]
+resource_name = "rotate"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rotator:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oo8pe"]
+_data = {
+&"RESET": SubResource("Animation_rpuu0"),
+&"rotate": SubResource("Animation_vr1i5")
+}
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_uhqqe")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7cbxl")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.174492, 0.0121139, -0.984584, 0, 0.999924, 0.0123026, 0.984659, 0.00214672, -0.174479, -5.25911, -1.22089, -5.0226)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.05467, 0.686448, 2.88158, -1.14235, 3.41928, 1.83731e-07, -2.73309, -0.913102, 2.1663, 0.843121, -1.18026, 0.367367)
+mesh = SubResource("BoxMesh_6adnx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15115, -0.335679, 4.62734)
+mesh = SubResource("SphereMesh_coq8p")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.415787, -2.35931, 0.83856)
+mesh = SubResource("PlaneMesh_8pr8v")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49661, 0, 1.04972)
+visible = false
+mesh = SubResource("BoxMesh_8pr8v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oo8pe")
+}
+autoplay = "rotate"
+
+[node name="Rotator" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, -0.288, 1.14)
+light_color = Color(0, 0, 1, 1)
+light_energy = 9.541
+distance_fade_begin = 776.26
+distance_fade_length = 59.55
+omni_range = 6.992
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, -0.288, 1.14)
+light_color = Color(0.994454, 0, 0.198413, 1)
+light_energy = 16.0
+distance_fade_begin = 776.26
+distance_fade_length = 59.55
+omni_range = 6.992
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288, 6.5)
+light_color = Color(0, 0.639468, 0.351742, 1)
+light_energy = 16.0
+distance_fade_begin = 776.26
+distance_fade_length = 59.55
+omni_range = 6.992
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288, -6.5)
+light_color = Color(0.744138, 0.235625, 0.97063, 1)
+light_energy = 16.0
+distance_fade_begin = 776.26
+distance_fade_length = 59.55
+omni_range = 6.992
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Rotator"]
+transform = Transform3D(0.668874, 0.712967, -0.210442, -0.283466, 0.506323, 0.814423, 0.687208, -0.485093, 0.540768, 0, 0, 0)
+light_energy = 0.339
+shadow_enabled = true
