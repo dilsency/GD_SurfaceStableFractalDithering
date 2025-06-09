@@ -6,4 +6,6 @@ This implementation is released under the [Mozilla Public License, v. 2.0](https
 
 Includes assets from Kenney's Prototype Textures: https://kenney.nl/assets/prototype-textures (thank you as always Kenney <3)
 
+Also includes custom textures I made myself for use in the demo scene.
+
 If you use this in one of your projects, please reach out and share it with [me on X](https://x.com/InfernalWAVE_)!
