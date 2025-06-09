@@ -248,7 +248,7 @@ void light()
     // Basic lambert:
     float NdotL = max(dot(NORMAL, LIGHT), 0.0);
     vec3 lambert_color = ALBEDO * LIGHT_COLOR * ATTENUATION * NdotL;
-    
+
     // We must compute dFdx, dFdy ourselves in the light pass:
     vec2 dx = dFdx(UV);
     vec2 dy = dFdy(UV);
