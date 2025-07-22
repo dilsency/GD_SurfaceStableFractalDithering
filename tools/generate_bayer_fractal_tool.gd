@@ -11,9 +11,12 @@ func generate_dither(recursion: int = 3) -> void:
 	var bucket_count: int = 256
 	var brightness_buckets := PackedInt32Array()
 	brightness_buckets.resize(bucket_count)
+	var brightness_buckets_2 := PackedInt32Array()
+	brightness_buckets_2.resize(bucket_count)
 	
 	for i in bucket_count:
 		brightness_buckets[i] = 0
+		brightness_buckets_2[i] = 0
 
 	var slices: Array[Image] = []
 	var inv_res: float = 1.0 / float(size)
@@ -38,6 +41,7 @@ func generate_dither(recursion: int = 3) -> void:
 				dist = dist / (dot_radius * 2.4)  # Key Rune constant
 				var val :float = clampf(1.0 - dist, 0.0, 1.0)
 				brightness_buckets[int(val * bucket_count)] += 1
+				brightness_buckets_2[int(val * bucket_count)] += 1.5
 				slice_img.set_pixel(x, y, Color(val, val, val))
 		#slice_img.save_png("res://export/DitherSlice"+str(z)+".png")
 		slices.append(slice_img)
@@ -50,9 +54,15 @@ func generate_dither(recursion: int = 3) -> void:
 	ramp_img.save_png("res://export/DitherRamp.png")
 	var ramp_tex := ImageTexture.create_from_image(ramp_img)
 	
+	var brightness_ramp_2 := compute_brightness_ramp(brightness_buckets_2, size, layers)
+	var ramp_img_2 := generate_ramp_image(brightness_ramp_2)
+	ramp_img_2.save_png("res://export/DitherRamp2.png")
+	var ramp_tex_2 := ImageTexture.create_from_image(ramp_img_2)
+	
 	var stamp := int(Time.get_unix_time_from_system() * 1000.0)
-	ResourceSaver.save(dither_3d, "res://dither_3d_%d.tres" % stamp)
-	ResourceSaver.save(ramp_tex, "res://dither_ramp_%d.tres" % stamp)
+	#ResourceSaver.save(dither_3d, "res://textures/dither/dither_3d_%d.tres" % stamp)
+	#ResourceSaver.save(ramp_tex, "res://textures/dither ramp/full/dither_ramp_%d.tres" % stamp)
+	ResourceSaver.save(ramp_tex_2, "res://textures/dither ramp/half/dither_ramp_2_%d.tres" % stamp)
 
 func get_bayer_points(recursion: int) -> Array[Vector2]:
 	var points :Array[Vector2]= [
@@ -98,5 +108,5 @@ func compute_brightness_ramp(buckets: PackedInt32Array, size: int, layers: int) 
 func generate_ramp_image(ramp: PackedFloat32Array) -> Image:
 	var img := Image.create(ramp.size(), 1, false, Image.FORMAT_R8)
 	for x in ramp.size():
-		img.set_pixel(x, 0, Color(ramp[x], ramp[x], ramp[x]))
+		img.set_pixel(x, 0.0, Color(ramp[x], ramp[x], ramp[x]))
 	return img

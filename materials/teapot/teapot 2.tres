@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b2pyspghna72o"]
+
+[ext_resource type="Shader" uid="uid://doryakqcyrmme" path="res://shader/fractal_dither_cutoff.gdshader" id="1_gc30q"]
+[ext_resource type="Texture2D" uid="uid://b3usibmi4ygo1" path="res://textures/albedo/solid/solid 2.png" id="2_gc30q"]
+[ext_resource type="Texture2D" uid="uid://581gdqnj5i2b" path="res://textures/dither ramp/pixel/bell 14 plus 0F.png" id="3_gc30q"]
+[ext_resource type="ImageTexture3D" uid="uid://dkbhx7y52lad3" path="res://textures/dither/dither_3d_1752495314706.tres" id="4_1fjdy"]
+
+[resource]
+render_priority = -1
+shader = ExtResource("1_gc30q")
+shader_parameter/albedo_tex = ExtResource("2_gc30q")
+shader_parameter/dither_tex = ExtResource("4_1fjdy")
+shader_parameter/dither_ramp_tex = ExtResource("3_gc30q")
+shader_parameter/dots_total = 64.0
+shader_parameter/dither_scale = 7.23
+shader_parameter/dot_size_variability = 0.395
+shader_parameter/dot_contrast = 1.0
+shader_parameter/dot_stretch_smoothness = 1.0
+shader_parameter/input_exposure = 0.1
+shader_parameter/input_offset = 0.001
+shader_parameter/use_radial_compensation = false
+shader_parameter/use_quantize_layers = true
+shader_parameter/use_inverse_dots = false
+shader_parameter/color_mode = 1
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/albedo_uv_offset = Vector2(0, 0)
+shader_parameter/albedo_uv_scale = Vector2(15, 15)
+shader_parameter/mode_cutoff = 1
+shader_parameter/mode_alpha = 0
+shader_parameter/should_use_bands = false
+shader_parameter/amount_bands = 2
+shader_parameter/mode_bell = 4
+shader_parameter/bezier_point_a = Vector2(0, 0)
+shader_parameter/bezier_point_control = Vector2(0, 4)
+shader_parameter/bezier_point_b = Vector2(1, 0)
+shader_parameter/alpha_twin_shift = 4.0

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xfmctdbu1008"
-path.s3tc="res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"
+uid="uid://t1ayg2mg8uod"
+path.s3tc="res://.godot/imported/05 plus 0A.png-de1219b09562a96aed53c4cfe953fbf4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://export/DitherRamp.png"
-dest_files=["res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"]
+source_file="res://textures/dither ramp/pixel/05 plus 0A.png"
+dest_files=["res://.godot/imported/05 plus 0A.png-de1219b09562a96aed53c4cfe953fbf4.s3tc.ctex"]
 
 [params]
 

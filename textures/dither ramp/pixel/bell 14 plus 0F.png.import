@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xfmctdbu1008"
-path.s3tc="res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"
+uid="uid://581gdqnj5i2b"
+path.s3tc="res://.godot/imported/bell 14 plus 0F.png-29b150a0108882d687268073e1585b1a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://export/DitherRamp.png"
-dest_files=["res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"]
+source_file="res://textures/dither ramp/pixel/bell 14 plus 0F.png"
+dest_files=["res://.godot/imported/bell 14 plus 0F.png-29b150a0108882d687268073e1585b1a.s3tc.ctex"]
 
 [params]
 

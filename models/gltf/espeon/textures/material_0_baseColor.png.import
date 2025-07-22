@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xfmctdbu1008"
-path.s3tc="res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"
+uid="uid://c738bboi3uxxa"
+path.s3tc="res://.godot/imported/material_0_baseColor.png-5fba0df488d89129e9e3061f54b8e2c8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://export/DitherRamp.png"
-dest_files=["res://.godot/imported/DitherRamp.png-5474b032b3d39a2ddd7a992d6d86f88c.s3tc.ctex"]
+source_file="res://models/gltf/espeon/textures/material_0_baseColor.png"
+dest_files=["res://.godot/imported/material_0_baseColor.png-5fba0df488d89129e9e3061f54b8e2c8.s3tc.ctex"]
 
 [params]
 
