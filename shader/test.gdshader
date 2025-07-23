@@ -19,15 +19,15 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	
+
 	// supposedly, NORMAL is in view space for whatever reason
 	// https://forum.godotengine.org/t/how-to-calculate-world-and-view-normals/55711/2
 	vec3 vertex_normal_world = (INV_VIEW_MATRIX * vec4(NORMAL.xyz, 0.0)).xyz;
-	
+
 	vec3 light_normal = normalize(global_vertex_position - light_position);
-	
+
 	float dotRes = dot(vertex_normal_world, light_normal);
-	
+
 	if(dotRes <= 0.0f)
 	{
 		ALBEDO    = vec3(1,0,0);   // Will be used in the light() pass

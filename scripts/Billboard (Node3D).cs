@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Billboard : MeshInstance3D
+public partial class BillboardNode3D : Node3D
 {
 	ulong elapsedTime;
 	ulong elapsedTimeStart;
@@ -49,9 +49,7 @@ public partial class Billboard : MeshInstance3D
 		else {
 			targetPosition = origin;
 		}
-		
 	}
-	
 
 	public override void _Process(double delta)
 	{

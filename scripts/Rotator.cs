@@ -23,6 +23,12 @@ public partial class Rotator : Node3D
 	
 	Vector3 lightNormal = new Vector3(0,0,0);
 
+
+	// when used, skip the "EventHandler" part of the name
+	[Signal]
+	public delegate void SignalUpdateLightPositionEventHandler(Vector3 lightPosition);
+
+	
 	public override void _Ready()
 	{
 		// Called every time the node is added to the scene.
@@ -31,7 +37,10 @@ public partial class Rotator : Node3D
 
 		elapsedTimeStart = Godot.Time.GetTicksMsec();
 		elapsedTime = 0;
+		
+		
 	}
+	
 	
 	public override void _Input(InputEvent @event)
 	{
@@ -108,24 +117,43 @@ public partial class Rotator : Node3D
 		if(elapsedTime < throttle){return;}
 		throttle = elapsedTime + throttleMax;
 		
+		// update our light position
+		// using signals!
+		//
+		NodePath npLight = new NodePath("%OmniLight3D");
+		OmniLight3D lightNode = GetNode<OmniLight3D>(npLight);
+		GD.Print("send signal!");
+		EmitSignal(SignalName.SignalUpdateLightPosition, lightNode.GlobalPosition);
+		
+		/*
 		// first we need to get the node
 		NodePath npLight = new NodePath("%OmniLight3D");
 		NodePath npTeapot = new NodePath("%Teapot_Node4");
 		
 		OmniLight3D lightNode = GetNode<OmniLight3D>(npLight);
 		if(lightNode == null){GD.Print("lightNode == null");return;}
-		MeshInstance3D teapotNode = GetNode<MeshInstance3D>(npTeapot);
+		Node3D teapotNode = GetNode<Node3D>(npTeapot);
 		if(teapotNode == null){GD.Print("teapotNode == null");return;}
 		
+		//if(teapotNode is MeshInstance3D){GD.Print("teapotNode is MeshInstance3D");}
+		MeshInstance3D teapotNodeCast = (teapotNode as MeshInstance3D);
+		if(teapotNodeCast == null){GD.Print("teapotNodeCast == null");return;}
+		
+		Mesh teapotNodeMesh = teapotNodeCast.Mesh;
+		if(teapotNodeMesh == null){GD.Print("teapotNodeMesh == null");return;}
 		//lightNormal = lightNode.GlobalPosition.DirectionTo(teapotNode.GlobalPosition);
 		
-		Material materialUnconverted = teapotNode.Mesh.SurfaceGetMaterial(0);
+		Material materialUnconverted = teapotNodeMesh.SurfaceGetMaterial(0);
+		*/
+		
 		/*int materialCount = m.GetSurfaceOverrideMaterialCount();
 		if(materialCount == null || materialCount <= 0){GD.Print("materialCount == null");return;}
 		Material materialUnconverted = m.GetSurfaceOverrideMaterial(0);
 		//ShaderMaterial sm = m.GetSurfaceOverrideMaterial(0) as ShaderMaterial;*/
+		/*
 		if(materialUnconverted == null){GD.Print("materialUnconverted == null");return;}
 		(materialUnconverted as ShaderMaterial).SetShaderParameter("light_position", lightNode.GlobalPosition);
+		*/
 		//(materialUnconverted as ShaderMaterial).SetShaderParameter("light_normal", lightNormal);
 		
 		//

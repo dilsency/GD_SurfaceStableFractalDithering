@@ -21,42 +21,88 @@ uniform sampler2D dither_ramp_tex_back;
 //
 uniform vec3 light_position = vec3(0,0,0);
 
-// Must match the Z‐depth (slice count) of your 3D texture.
+/**
+*	Must match the Z‐depth (slice count) of your 3D texture. [i]256[/i].
+*/
 uniform float dots_total = 256.0;
 
-// log2‐scale for the dot pattern. The actual multiplier is exp2(dither_scale).
+/**
+*	log2‐scale for the dot pattern. The actual multiplier is exp2(dither_scale).
+*/
 uniform float dither_scale = 0.0;
 
-// 0 = dot size shrinks a lot with brightness, 1 = minimal size change
+/**
+*	0 = dot size shrinks a lot with brightness, 1 = minimal size change
+*/
 uniform float dot_size_variability = 0.0;
 
-// Makes final pattern more binary. Try ~1.0–2.0
+/**
+*	Makes final pattern more binary. Try ~1.0–2.0
+*/
 uniform float dot_contrast = 1.0;
 
-// Extra smoothing for angled surfaces
+/**
+*	Extra smoothing for angled surfaces
+*/
 uniform float dot_stretch_smoothness = 1.0;
 
-// Adjust the incoming color brightness
+/**
+*	Adjust the incoming color brightness
+*/
 uniform float input_exposure = 1.0;
+/**
+*	Adjust the incoming color brightness
+*/
 uniform float input_offset   = 0.0;
 
-// Toggles for advanced features:
+/**
+*	Toggle for advanced features:
+*/
 uniform bool use_radial_compensation = false;
+/**
+*	Toggle for advanced features:
+*/
 uniform bool use_quantize_layers     = false;
+/**
+*	Toggle for advanced features:
+*/
 uniform bool use_inverse_dots        = false;
 
-// 0=Grayscale, 1=RGB, 2=CMYK
+/**
+*	0=Grayscale, 1=RGB, 2=CMYK
+*/
 uniform int color_mode = 0;
 
-// Basic PBR knobs
+/**
+*	Basic PBR knob
+*/
 uniform float metallic    : hint_range(0,1) = 0.0;
+/**
+*	Basic PBR knob
+*/
 uniform float roughness   : hint_range(0,1) = 0.5;
+/**
+*	Basic PBR knob
+*/
 uniform vec3  emission    : source_color    = vec3(0.0);
+/**
+*	Basic PBR knob
+*/
 uniform float emission_energy          = 1.0;
 
-// Albedo UV transform
+/**
+*	Albedo UV transform
+*/
 uniform vec2 albedo_uv_offset = vec2(0.0);
+/**
+*	Albedo UV transform
+*/
 uniform vec2 albedo_uv_scale  = vec2(1.0);
+
+/**
+*	How close to the edge the dither dots will go. 0: closer. 1: spreads far out.
+*/
+uniform float alpha_cutoff = 0.3f;
 
 // ----------------------------------------------------
 //  HELPER FUNCTIONS
@@ -224,8 +270,6 @@ void vertex()
     global_vertex_position= (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
-const float alpha_cutoff = 0.3f;
-
 // ----------------------------------------------------
 //  FRAGMENT
 //     Here we simply set the base ALBEDO and PBR properties.
@@ -237,8 +281,7 @@ void fragment()
     vec2 uv_albedo = UV * albedo_uv_scale + albedo_uv_offset;
 
     // Sample base color from texture
-    vec3 base_col = texture(albedo_tex, uv_albedo).rgb;
-    vec3 back_col = texture(albedo_tex_back, uv_albedo).rgb;
+    vec3 texture_albedo_col = texture(albedo_tex, uv_albedo).rgb;
 
 	// supposedly, NORMAL is in view space for whatever reason
 	// https://forum.godotengine.org/t/how-to-calculate-world-and-view-normals/55711/2
@@ -266,7 +309,9 @@ void fragment()
 
 		// both of these work
 		//isEdge = (alpha_cutoff + dotRes) >= 0.0f;
-		isEdge = dotRes >= -alpha_cutoff;
+		isEdge = dotRes >= -alpha_cutoff / 1.5f;
+
+		vec3 base_col = mix(texture_albedo_col, albedo_col_lit, 0.9f);
 
 		ALBEDO = base_col + (isEdge ? dithered : vec3(0,0,0));
 		//ALBEDO = base_col + mix(vec3(0,0,0), dithered, alpha);
@@ -283,7 +328,9 @@ void fragment()
 
 		bool isEdge = dotRes <= alpha_cutoff;
 
-		ALBEDO = back_col + (isEdge ? dithered : vec3(0,0,0));
+		vec3 base_col = mix(texture_albedo_col, albedo_col_unlit, 0.9f);
+
+		ALBEDO = base_col + (isEdge ? dithered : vec3(0,0,0));
 		//ALBEDO = back_col + mix(vec3(0,0,0), dithered, alpha);
 	}
 
