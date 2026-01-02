@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surface Stable Fractal Dithering", "Surface Stable Fractal Dithering.csproj", "{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Surface Stable Fractal Dithering", "Surface Stable Fractal Dithering.csproj", "{5CA5BE1D-39DC-450B-89A0-7904A142BD63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{EDAEA6F9-D39C-4867-BBF4-5D66C5D3207C}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{5CA5BE1D-39DC-450B-89A0-7904A142BD63}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
